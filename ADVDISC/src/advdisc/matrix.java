@@ -64,17 +64,18 @@ class matrix{
 //        System.out.println("Value entered - " + m[row][col]);
     }
     
-    public void displayValue(int row, int col){
-        System.out.println(m[row][col]);
+    public float returnValue(int row, int col){
+        return m[row][col];
     }
+    
     
     public void displayMatrix(){
         for(int i=0; i<returnRow(); i++){
-            System.out.println("[");
+            System.out.printf("[");
             for(int j=0; j<returnCol(); j++){
-                System.out.println(m[i][j] + " ");
+                System.out.printf("%5.2f", m[i][j]);
             }
-            System.out.println("]");
+            System.out.printf("]\n");
         }
     }
 
