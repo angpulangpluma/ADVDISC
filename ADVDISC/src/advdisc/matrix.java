@@ -47,13 +47,13 @@ class matrix{
         m = new float[row][col];
     }
     
-    //check if matrix is square
-    public boolean squareCheck(){
-        boolean accept = true;
-        if (this.row != this.col)
-            accept = false;
-        return accept;
-    }
+//    //check if matrix is square
+//    public boolean squareCheck(){
+//        boolean accept = true;
+//        if (this.row != this.col)
+//            accept = false;
+//        return accept;
+//    }
     
     public float[][] returnMatrix(){
         return this.m;

@@ -24,15 +24,21 @@ public class matrixop {
       this.b = b;
   }
   
-  public void checkMatrix(){ //conforming to multiplication
-      if (a.returnRow()!=b.returnCol()){
-          System.out.println("The matrices you have entered cannot be multiplied.");
-          //print reason
-      }
+//  public void checkMatrix(){ //conforming to multiplication
+//      if (a.returnRow()!=b.returnCol()){
+//          System.out.println("The matrices you have entered cannot be multiplied.");
+//          //print reason
+//      } else if(!b.squareCheck()){ //divisor is not a square matrix
+//          System.out.println("Your divisor is not a square matrix...");
+//      }
+//      
+//  }
+  
+  public void getInverse(){ //get inverse of B in order to multiply with A
       
   }
   
-  public void getInverse(){ //get inverse of B in order to multiply with A
+  public void multiplyMatrix(){
       
   }
 }
