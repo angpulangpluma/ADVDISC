@@ -24,38 +24,59 @@ public class ADVDISC {
         Scanner sc = new Scanner(System.in);
         String in = "";
         int input;
+        float elem;
         System.out.println("Welcome! Enter number of rows of first matrix: ");
         while(true){
             in = sc.next();
             try{
                 input = Integer.parseInt(in);
-                if (input>0)
+                if (input>0){
+//                    System.out.println("Entered - " + input);
                     break;
+                }
             } catch(IllegalArgumentException e){
                 System.out.println("Please enter a valid integer.");
                 e.printStackTrace();
             }
         }
         m.defineRow(input);
-        System.out.println("Welcome! Enter number of columns of matrix: ");
+        System.out.println("Welcome! Enter number of columns of first matrix: ");
         while(true){
             in = sc.next();
             try{
                 input = Integer.parseInt(in);
-                if (input>0)
+                if (input>0){
+//                    System.out.println("Entered - " + input);
                     break;
+                }
+                    
             } catch(IllegalArgumentException e){
                 System.out.println("Please enter a valid integer.");
                 e.printStackTrace();
             }
         }
         m.defineCol(input);
-        if(!m.matrixCheck()){
-            System.out.println("We will not continue this. Your matrix must have" +
-                    "the same number of columns and rows.");
-        } else{
-            //insert operation here
-        }
+        m.defineMatrix();
+        for(int i=0; i<m.returnRow(); i++){
+            for(int j=0; j<m.returnCol(); j++){
+                System.out.println("Enter value of element in column " + i + " in row " + j + ": ");
+                while(true){
+                    in = sc.next();
+                    try{
+                        elem = Float.parseFloat(in);
+//                        System.out.println("Entered - " + elem);
+                        m.changeValue(i, j, elem);
+                        break;
+                    } catch(IllegalArgumentException e){
+                        System.out.println("Please enter a valid element.");
+                        e.printStackTrace();
+                    }
+                }
+            }//end inner
+        }//end outer
+        
+        System.out.println("Your matrix: ");
+        m.displayMatrix();
     }
 
 }

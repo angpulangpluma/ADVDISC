@@ -43,12 +43,12 @@ class matrix{
         return this.col;
     }
     
-    public void defineMatrix(float[][] m){
-        this.m = m;
+    public void defineMatrix(){
+        m = new float[row][col];
     }
     
     //check if matrix is square
-    public boolean matrixCheck(){
+    public boolean squareCheck(){
         boolean accept = true;
         if (this.row != this.col)
             accept = false;
@@ -60,9 +60,18 @@ class matrix{
     }
     
     public void changeValue(int row, int col, float value){
-        this.m[row][col] = value;
+        m[row][col] = value;
+//        System.out.println("Value entered - " + m[row][col]);
     }
     
-    
+    public void displayMatrix(){
+        for(int i=0; i<returnRow(); i++){
+            System.out.println("[");
+            for(int j=0; j<returnCol(); j++){
+                System.out.println(m[i][j] + " ");
+            }
+            System.out.println("]");
+        }
+    }
 
 }

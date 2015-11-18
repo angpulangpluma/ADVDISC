@@ -24,7 +24,15 @@ public class matrixop {
       this.b = b;
   }
   
-  public void checkMatrix(){
+  public void checkMatrix(){ //conforming to multiplication
+      if (a.returnRow()!=b.returnCol()){
+          System.out.println("The matrices you have entered cannot be multiplied.");
+          //print reason
+      }
+      
+  }
+  
+  public void getInverse(){ //get inverse of B in order to multiply with A
       
   }
 }
