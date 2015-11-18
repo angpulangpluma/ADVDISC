@@ -59,7 +59,7 @@ public class ADVDISC {
         m.defineMatrix();
         for(int i=0; i<m.returnRow(); i++){
             for(int j=0; j<m.returnCol(); j++){
-                System.out.println("Enter value of element in row " + i + " in column " + j + ": ");
+                System.out.println("Enter value of element in column " + i + " in row " + j + ": ");
                 while(true){
                     in = sc.next();
                     try{
