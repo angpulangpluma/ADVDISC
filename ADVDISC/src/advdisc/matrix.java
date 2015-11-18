@@ -64,6 +64,10 @@ class matrix{
 //        System.out.println("Value entered - " + m[row][col]);
     }
     
+    public void displayValue(int row, int col){
+        System.out.println(m[row][col]);
+    }
+    
     public void displayMatrix(){
         for(int i=0; i<returnRow(); i++){
             System.out.println("[");
