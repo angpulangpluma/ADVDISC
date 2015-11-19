@@ -93,29 +93,23 @@ public class matrixop {
           c.defineMatrix();
           
           //multiply here
+          //row of product matrix
           for(int x=0; x<c.returnRow(); x++){
+              //column of product matrix
               for(int y=0; y<c.returnCol(); y++){
+                  //current column needed
                   for(int i=0; i<a.returnCol(); i++){
-                      System.out.println("Multiplying element of A in row " + x + " and column " + i + 
-                              " to element of B in row " + i + " and column " + y + ": " + 
-                              a.returnValue(x, i) + "*" + b.returnValue(i, y));
-                      System.out.println("Result: " + a.returnValue(x, i) * b.returnValue(i, y));
+//                      System.out.println("Multiplying element of A in row " + x + " and column " + i + 
+//                              " to element of B in row " + i + " and column " + y + ": " + 
+//                              a.returnValue(x, i) + "*" + b.returnValue(i, y));
+//                      System.out.println("Result: " + a.returnValue(x, i) * b.returnValue(i, y));
                       elem += (a.returnValue(x, i) * b.returnValue(i, y));
                   }
+//                  System.out.println("Resulting element: " + elem);
+                  //place value of elem in product matrix
                   c.changeValue(x, y, elem);
-//                  int i=0;
-//                  //for each row in matrix A
-//                  while(i<a.returnRow()){
-//                      //get one column in matrix B
-//                      for(int j=0; j<b.returnCol(); j++){
-//                      //sum of multiplying all entries of one row of matrix A
-//                      //to one column of matrix B
-//                          
-//                      }
-//                      //initialize result
-//                      i++;
-//                  }
-                  
+                  //reset value of elem for next element in product matrix
+                  elem = 0;
               }//end col count for product matrix
           }//end row count for product matrix
           

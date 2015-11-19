@@ -73,7 +73,7 @@ class matrix{
         for(int i=0; i<returnRow(); i++){
             System.out.printf("[");
             for(int j=0; j<returnCol(); j++){
-                System.out.printf("%5.2f", m[i][j]);
+                System.out.printf("%5.2f ", m[i][j]);
             }
             System.out.printf("]\n");
         }
