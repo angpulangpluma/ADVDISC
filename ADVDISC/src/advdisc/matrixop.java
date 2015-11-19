@@ -35,22 +35,90 @@ public class matrixop {
 //  }
   
   public boolean hasZeroRow(matrix b){
-      boolean check = false;
+      int zero = 0;
       for(int i=0; i<b.returnRow(); i++){
           for(int j=0; j<b.returnCol(); j++){
-              if (b.returnValue(i,j)==0)
-                  check = true;
-              else check = false;
-              
-              if(j==b.returnCol()-1 && !check)
-                break;
+              if (b.returnValue(i,j)==0){
+                  zero++;
+              }
           }
-          if (!check)
-            break;
+          if(zero==b.returnCol())
+            return true;
+          zero = 0;
       }
-      return check;
+      return false;
   }
   
+//  public matrix sortZero(matrix a){
+//      boolean found = false;
+//      boolean hasZero = false;
+//      int zcount = 0;
+//      float[] f, l;
+//      matrix b = new matrix();
+//      b.defineCol(a.returnCol());
+//      b.defineRow(a.returnRow());
+//      for(int i=0; i<b.returnRow(); i++){
+//          for(int j=0; j<b.returnCol(); j++){
+//              if(i==0 && j==0 && a.returnValue(i, j)==0){
+//                  found = true;
+//                  hasZero = true;
+//                  f = a.returnMatrixRow(i);
+//                  zcount++;
+//              } else break;
+//              if(i!=0 && j==0 && !found && a.returnValue(i, j)==0){
+//                  found = true;
+//                  f = a.returnMatrixRow(i);
+//                  zcount++;
+//              }
+//              //swap rows here
+//              zcount = 0;
+////              if(found && a.returnValue(i, j)!=0){
+////                  break;
+////              }
+//          }
+//          
+//      }
+//      return b;
+//  }
+  
+//  public matrix getAdjugate(matrix b){
+//      matrix adj = new matrix();
+//      return adj;
+//  }
+//  
+//  public float getDeterminant(matrix b){
+//     float det = 0;
+//     return det;
+//  }
+  
+  public boolean isIdentityMatrix(matrix b){
+      boolean identity = false;
+      for(int i=0; i<b.returnRow(); i++){
+          for(int j=0; j<b.returnCol(); j++){
+              if(i==j && b.returnValue(i, j)==1)
+                  identity = true;
+              else if (i!=j && b.returnValue(i, j)==0)
+                  identity = true;
+              else identity = false;
+          }//end inner for
+      }//end outer for
+      return identity;
+  }
+  
+  public int getLeadingEntry(float[] b){
+     int i;
+     System.out.printf("Row entries: ");
+     for(int j=0; j<b.length; j++){
+         System.out.printf("%.2f ", b[j]);
+     }
+     for(i=0; i<b.length; i++){
+        if(b[i]!=0)
+          break;
+     }
+     return i;
+  }
+  
+  //get inverse of matrix using elementary row operations
   public void getInverse(matrix b){ //get inverse of B in order to multiply with A
       boolean done = false;
       
@@ -78,50 +146,59 @@ public class matrixop {
           System.out.println("Singular matrix! Row of zeroes detected!");  
       } else{
           //convert into inverse here
-      }
-  }
+          //gauss-jordan c & d!
+          float lead = 0;
+          for(int i=0; i<c.returnRow(); i++){
+            //get leading entry
+            lead = c.returnValue(i, getLeadingEntry(c.returnMatrixRow(i)));
+            System.out.println("Leading entry is " + lead);
+            for(int j=0; j<c.returnCol(); j++){
+                if(c.returnValue(i, j)!=0){
+                   float g = c.returnValue(i, j)/lead;
+                   c.changeValue(i, j, g);
+                   g = d.returnValue(i, j)/lead;
+                   d.changeValue(i, j, g);
+                }
+                System.out.println("Partial result: \n c:");
+                c.displayMatrix();
+                System.out.println("\n d:");
+                d.displayMatrix();
+            }
+            //let's zero the other entries on the same column
+            //as the leading entry!
+            for(int j=0; j<c.returnRow(); j++){
+                float[] f = c.returnMatrixRow(i);
+                for(int k=0; k<c.returnCol(); k++){
+                    if(j!=i && c.returnValue(j, k)!=1){
+                        float g = f[k]*c.returnValue(j, k)*-1;
+                        c.changeValue(j, k, c.returnValue(j, k)+g);
+                        d.changeValue(j, k, d.returnValue(j, k)+g);
+                    }
+                }
+                System.out.println("Partial result: \n c:");
+                c.displayMatrix();
+                System.out.println("\n d:");
+                d.displayMatrix();
+            }
+            System.out.println("After Gauss-Jordan: \n c:");
+                c.displayMatrix();
+                System.out.println("\n d:");
+                d.displayMatrix();
+            if(isIdentityMatrix(c)){
+                System.out.println("Your inverse is:");
+                d.displayMatrix();
+            } else{
+                System.out.println("Your matrix is singular!");
+            }
+          }
+      }//end else
+  }//end getInverse
   
-  public void multiplyMatrix(){
-      matrix c = new matrix();
-      float elem = 0;
+  public void multiplyMatrix(matrix a, matrix b){
       if(a.returnCol()!=b.returnRow()){
           System.out.println("Not conformable for multiplication!");
       } else{
-          //initialize product matrix
-          c.defineRow(a.returnRow());
-          c.defineCol(b.returnCol());
-          c.defineMatrix();
           
-          //multiply here
-          //row of product matrix
-          for(int x=0; x<c.returnRow(); x++){
-              //column of product matrix
-              for(int y=0; y<c.returnCol(); y++){
-                  //current column needed
-                  for(int i=0; i<a.returnCol(); i++){
-//                      System.out.println("Multiplying element of A in row " + x + " and column " + i + 
-//                              " to element of B in row " + i + " and column " + y + ": " + 
-//                              a.returnValue(x, i) + "*" + b.returnValue(i, y));
-//                      System.out.println("Result: " + a.returnValue(x, i) * b.returnValue(i, y));
-                      elem += (a.returnValue(x, i) * b.returnValue(i, y));
-                  }
-//                  System.out.println("Resulting element: " + elem);
-                  //place value of elem in product matrix
-                  c.changeValue(x, y, elem);
-                  //reset value of elem for next element in product matrix
-                  elem = 0;
-              }//end col count for product matrix
-          }//end row count for product matrix
-          
-          System.out.printf("Matrix A: ");
-          a.displayMatrix();
-          System.out.printf("\n Matrix B: ");
-          b.displayMatrix();
-          System.out.println("\n AB: ");
-          c.displayMatrix();
-          
-      }//end else
-      
-  }//end multiplyMatrix
-  
-}//end class
+      }
+  }
+}
