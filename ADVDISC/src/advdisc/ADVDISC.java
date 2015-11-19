@@ -17,9 +17,8 @@ public class ADVDISC {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        matrixop r = new matrixop();
+    
+    public static matrix getMatrix(){
         matrix m = new matrix();
         Scanner sc = new Scanner(System.in);
         String in = "";
@@ -59,7 +58,7 @@ public class ADVDISC {
         m.defineMatrix();
         for(int i=0; i<m.returnRow(); i++){
             for(int j=0; j<m.returnCol(); j++){
-                System.out.println("Enter value of element in column " + i + " in row " + j + ": ");
+                System.out.println("Enter value of element in row " + i + " in column " + j + ": ");
                 while(true){
                     in = sc.next();
                     try{
@@ -77,6 +76,14 @@ public class ADVDISC {
         
         System.out.println("Your matrix: ");
         m.displayMatrix();
+        return m;
+    }//end getMatrix();
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+        matrixop r = new matrixop();
+        matrix ma = getMatrix();
+        r.getInverse(ma);
     }
 
 }

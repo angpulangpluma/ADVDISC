@@ -68,12 +68,14 @@ class matrix{
         return m[row][col];
     }
     
-    
+    public float[] returnMatrixRow(int row){
+        return m[row];
+    }
     public void displayMatrix(){
         for(int i=0; i<returnRow(); i++){
             System.out.printf("[");
             for(int j=0; j<returnCol(); j++){
-                System.out.printf("%5.2f", m[i][j]);
+                System.out.printf("%5.2f ", m[i][j]);
             }
             System.out.printf("]\n");
         }
