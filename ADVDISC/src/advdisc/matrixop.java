@@ -155,8 +155,14 @@ public class matrixop {
             for(int j=0; j<c.returnCol(); j++){
                 if(c.returnValue(i, j)!=0){
                    float g = c.returnValue(i, j)/lead;
-                   c.changeValue(i, j, g);   
+                   c.changeValue(i, j, g);
+                   g = d.returnValue(i, j)/lead;
+                   d.changeValue(i, j, g);
                 }
+                System.out.println("Partial result: \n c:");
+                c.displayMatrix();
+                System.out.println("\n d:");
+                d.displayMatrix();
             }
             //let's zero the other entries on the same column
             //as the leading entry!
@@ -166,13 +172,24 @@ public class matrixop {
                     if(j!=i && c.returnValue(j, k)!=1){
                         float g = f[k]*c.returnValue(j, k)*-1;
                         c.changeValue(j, k, c.returnValue(j, k)+g);
+                        d.changeValue(j, k, d.returnValue(j, k)+g);
                     }
                 }
-                System.out.println("Partial result:");
+                System.out.println("Partial result: \n c:");
                 c.displayMatrix();
+                System.out.println("\n d:");
+                d.displayMatrix();
             }
-            System.out.println("After Gauss-Jordan:");
-            c.displayMatrix();
+            System.out.println("After Gauss-Jordan: \n c:");
+                c.displayMatrix();
+                System.out.println("\n d:");
+                d.displayMatrix();
+            if(isIdentityMatrix(c)){
+                System.out.println("Your inverse is:");
+                d.displayMatrix();
+            } else{
+                System.out.println("Your matrix is singular!");
+            }
           }
       }//end else
   }//end getInverse
