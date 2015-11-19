@@ -81,11 +81,53 @@ public class matrixop {
       }
   }
   
-  public void multiplyMatrix(matrix a, matrix b){
+  public void multiplyMatrix(){
+      matrix c = new matrix();
+      float elem = 0;
       if(a.returnCol()!=b.returnRow()){
           System.out.println("Not conformable for multiplication!");
       } else{
+          //initialize product matrix
+          c.defineRow(a.returnRow());
+          c.defineCol(b.returnCol());
+          c.defineMatrix();
           
-      }
-  }
-}
+          //multiply here
+          for(int x=0; x<c.returnRow(); x++){
+              for(int y=0; y<c.returnCol(); y++){
+                  for(int i=0; i<a.returnCol(); i++){
+                      System.out.println("Multiplying element of A in row " + x + " and column " + i + 
+                              " to element of B in row " + i + " and column " + y + ": " + 
+                              a.returnValue(x, i) + "*" + b.returnValue(i, y));
+                      System.out.println("Result: " + a.returnValue(x, i) * b.returnValue(i, y));
+                      elem += (a.returnValue(x, i) * b.returnValue(i, y));
+                  }
+                  c.changeValue(x, y, elem);
+//                  int i=0;
+//                  //for each row in matrix A
+//                  while(i<a.returnRow()){
+//                      //get one column in matrix B
+//                      for(int j=0; j<b.returnCol(); j++){
+//                      //sum of multiplying all entries of one row of matrix A
+//                      //to one column of matrix B
+//                          
+//                      }
+//                      //initialize result
+//                      i++;
+//                  }
+                  
+              }//end col count for product matrix
+          }//end row count for product matrix
+          
+          System.out.printf("Matrix A: ");
+          a.displayMatrix();
+          System.out.printf("\n Matrix B: ");
+          b.displayMatrix();
+          System.out.println("\n AB: ");
+          c.displayMatrix();
+          
+      }//end else
+      
+  }//end multiplyMatrix
+  
+}//end class
