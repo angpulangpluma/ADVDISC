@@ -18,37 +18,41 @@ public class ADVDISC {
      * @param args the command line arguments
      */
     
-    public static matrix getMatrix(){
+    public static matrix inputMatrix(){
+
         matrix m = new matrix();
         Scanner sc = new Scanner(System.in);
         String in = "";
         int input;
         float elem;
-        System.out.println("Welcome! Enter number of rows of first matrix: ");
+        System.out.println("Welcome! Enter number of rows of matrix: ");
         while(true){
             in = sc.next();
             try{
-                input = Integer.parseInt(in);
-                if (input>0){
-//                    System.out.println("Entered - " + input);
-                    break;
-                }
+                do{
+                  input = Integer.parseInt(in);
+                  if(input>0)
+                      break;
+                  else System.out.println("Please enter a valid integer.");
+                }while(input<=0);
+                break;
             } catch(IllegalArgumentException e){
                 System.out.println("Please enter a valid integer.");
                 e.printStackTrace();
             }
         }
         m.defineRow(input);
-        System.out.println("Welcome! Enter number of columns of first matrix: ");
+        System.out.println("Welcome! Enter number of columns of matrix: ");
         while(true){
             in = sc.next();
             try{
-                input = Integer.parseInt(in);
-                if (input>0){
-//                    System.out.println("Entered - " + input);
-                    break;
-                }
-                    
+                do{
+                  input = Integer.parseInt(in);
+                  if(input>0)
+                      break;
+                  else System.out.println("Please enter a valid integer.");
+                }while(input<=0);
+                break;
             } catch(IllegalArgumentException e){
                 System.out.println("Please enter a valid integer.");
                 e.printStackTrace();
@@ -77,13 +81,14 @@ public class ADVDISC {
         System.out.println("Your matrix: ");
         m.displayMatrix();
         return m;
+
     }//end getMatrix();
     
     public static void main(String[] args) {
         // TODO code application logic here
         matrixop r = new matrixop();
-        matrix ma = getMatrix();
+        matrix ma = inputMatrix();
         r.getInverse(ma);
     }
-
-}
+        
+    }//end inputMatrix
