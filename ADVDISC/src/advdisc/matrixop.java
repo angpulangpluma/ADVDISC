@@ -1,6 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To set this license header, choose License Headers in Project Properties.
+ * To set this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package advdisc;
@@ -13,26 +13,38 @@ package advdisc;
  */
 public class matrixop {
 
-    matrix a, b;
-    matrix result;
+    private matrix a, b;
+    private static matrixop opInstance = new matrixop();
 
-    public void defineFirstMatrix(matrix a) {
+    public void setFirstMatrix(matrix a) {
         this.a = a;
     }
 
-    public void defineSecondMatrix(matrix b) {
+    public void setSecondMatrix(matrix b) {
         this.b = b;
+    }
+
+    public matrix getFirstMatrix() {
+        return a;
+    }
+
+    public matrix getSecondMatrix() {
+        return b;
+    }
+
+    public static matrixop getInstance() {
+        return opInstance;
     }
 
     public boolean hasZeroRow(matrix b) {
         int zero = 0;
-        for (int i = 0; i < b.returnRow(); i++) {
-            for (int j = 0; j < b.returnCol(); j++) {
-                if (b.returnValue(i, j) == 0) {
+        for (int i = 0; i < b.getRow(); i++) {
+            for (int j = 0; j < b.getCol(); j++) {
+                if (b.getValue(i, j) == 0) {
                     zero++;
                 }
             }
-            if (zero == b.returnCol()) {
+            if (zero == b.getCol()) {
                 return true;
             }
             zero = 0;
@@ -42,11 +54,11 @@ public class matrixop {
 
     public boolean isIdentityMatrix(matrix b) {
         boolean identity = false;
-        for (int i = 0; i < b.returnRow(); i++) {
-            for (int j = 0; j < b.returnCol(); j++) {
-                if (i == j && b.returnValue(i, j) == 1) {
+        for (int i = 0; i < b.getRow(); i++) {
+            for (int j = 0; j < b.getCol(); j++) {
+                if (i == j && b.getValue(i, j) == 1) {
                     identity = true;
-                } else if (i != j && b.returnValue(i, j) == 0) {
+                } else if (i != j && b.getValue(i, j) == 0) {
                     identity = true;
                 } else {
                     identity = false;
@@ -72,27 +84,27 @@ public class matrixop {
     }
 
     //get inverse of matrix using elementary row operations
-    public void getInverse(matrix b) { //get inverse of B in order to multiply with A
+    public matrix getInverse(matrix b) { //get inverse of B in order to multiply with A
         //initializing augemented matrix for inverse
         //c will represent the original matrix, should be identity matrix after
-        matrix c = new matrix(b.returnMatrix(), b.returnRow(), b.returnCol());
+        matrix c = new matrix(b.getMatrix(), b.getRow(), b.getCol());
         //d will represent the identity matrix, should be the inverted matrix after
         matrix d = new matrix();
-        d.defineCol(b.returnCol());
-        d.defineRow(b.returnRow());
+        d.setCol(b.getCol());
+        d.setRow(b.getRow());
         d.defineMatrix();
-        for (int i = 0; i < d.returnRow(); i++) {
-            for (int j = 0; j < d.returnCol(); j++) {
+        for (int i = 0; i < d.getRow(); i++) {
+            for (int j = 0; j < d.getCol(); j++) {
                 if (i == j) {
-                    d.changeValue(i, j, 1);
+                    d.setValue(i, j, 1);
                 } else {
-                    d.changeValue(i, j, 0);
+                    d.setValue(i, j, 0);
                 }
             }
         }
 
         //preliminary checks
-        if (b.returnCol() != b.returnRow()) {
+        if (b.getCol() != b.getRow()) {
             System.out.println("The matrix does not have an inverse because it is not a square matrix."
                     + "\n A square matrix is a matrix with n rows and n columns.");
         } else if (hasZeroRow(b)) {
@@ -101,30 +113,30 @@ public class matrixop {
             //convert into inverse here
             //gauss-jordan c & d!
             float lead = 0;
-            for (int i = 0; i < c.returnRow(); i++) {
+            for (int i = 0; i < c.getRow(); i++) {
                 //get leading entry
-                lead = getLeadingEntry(c.returnMatrixRow(i));
+                lead = getLeadingEntry(c.getMatrixRow(i));
                 System.out.println("Leading entry is " + lead);
 
-                //change values after making leading entry 1
+                //set values after making leading entry 1
                 System.out.println("Changed Lead from " + lead + " to 1, changing values for row " + i);
                 //j = column
-                for (int j = 0; j < c.returnCol(); j++) {
-                    if (c.returnValue(i, j) != 0) {
-                        float g = c.returnValue(i, j) / lead;
-                        System.out.println("C BEFORE = " + c.returnValue(i, j));
-                        c.changeValue(i, j, g);
-                        System.out.println("C AFTER = " + c.returnValue(i, j));
+                for (int j = 0; j < c.getCol(); j++) {
+                    if (c.getValue(i, j) != 0) {
+                        float g = c.getValue(i, j) / lead;
+                        System.out.println("C BEFORE = " + c.getValue(i, j));
+                        c.setValue(i, j, g);
+                        System.out.println("C AFTER = " + c.getValue(i, j));
                     }
 
                 }
-                for (int j = 0; j < d.returnCol(); j++) {
+                for (int j = 0; j < d.getCol(); j++) {
                     System.out.println("i = " + i + " j = " + j);
-                    float g2 = d.returnValue(i, j) / lead;
+                    float g2 = d.getValue(i, j) / lead;
 
-                    System.out.println("D BEFORE = " + d.returnValue(i, j));
-                    d.changeValue(i, j, g2);
-                    System.out.println("D AFTER = " + d.returnValue(i, j));
+                    System.out.println("D BEFORE = " + d.getValue(i, j));
+                    d.setValue(i, j, g2);
+                    System.out.println("D AFTER = " + d.getValue(i, j));
                 }
 
                 System.out.println("--------\n AFTER CHANGING ROW" + i + "\n-----------");
@@ -136,25 +148,25 @@ public class matrixop {
                 System.out.println("--------\nCHANGE OTHER ENTRIES\n-----------");
                 //let's zero the other entries on the same column
                 //as the leading entry!
-                for (int j = 0; j < c.returnRow(); j++) {
+                for (int j = 0; j < c.getRow(); j++) {
                     //System.out.println("j = " + j + " | LEAD2 = " + lead2);
-                    float[] f = c.returnMatrixRow(i);
-                    float[] f2 = d.returnMatrixRow(i);
+                    float[] f = c.getMatrixRow(i);
+                    float[] f2 = d.getMatrixRow(i);
                     // i = current row
                     // j = other rows
 
-                    float lead2 = c.returnValue(j, i);
-                    for (int k = 0; k < c.returnCol(); k++) {
+                    float lead2 = c.getValue(j, i);
+                    for (int k = 0; k < c.getCol(); k++) {
                         System.out.println("I'm at (" + j + ", " + k + ")");
                         if (j != i) {
                             float g = f[k] * lead2 * -1;
-                            System.out.println("C VALUE BEFORE = " + c.returnValue(j, k));
-                            c.changeValue(j, k, c.returnValue(j, k) + g);
-                            System.out.println("C VALUE AFTER = " + c.returnValue(j, k));
+                            System.out.println("C VALUE BEFORE = " + c.getValue(j, k));
+                            c.setValue(j, k, c.getValue(j, k) + g);
+                            System.out.println("C VALUE AFTER = " + c.getValue(j, k));
                             float g2 = f2[k] * lead2 * -1;
-                            System.out.println("D VALUE BEFORE = " + d.returnValue(j, k));
-                            d.changeValue(j, k, d.returnValue(j, k) + g2);
-                            System.out.println("D VALUE AFTER = " + d.returnValue(j, k));
+                            System.out.println("D VALUE BEFORE = " + d.getValue(j, k));
+                            d.setValue(j, k, d.getValue(j, k) + g2);
+                            System.out.println("D VALUE AFTER = " + d.getValue(j, k));
 
                         }
                     }
@@ -168,43 +180,51 @@ public class matrixop {
             c.displayMatrix();
             System.out.println("\n d:");
             d.displayMatrix();
+            
             if (isIdentityMatrix(c)) {
                 System.out.println("Your inverse is:");
                 d.displayMatrix();
             } else {
+                d = null;
                 System.out.println("Your matrix is singular!");
             }
 
         }//end else
+        return d;
     }//end getInverse
 
-    public void multiplyMatrix() {
+    public matrix multiplyMatrix(matrix a, matrix b) {
         matrix c = new matrix();
         float elem = 0;
-        if (a.returnCol() != b.returnRow()) {
+        if (a.getCol() != b.getRow()) {
             System.out.println("Not conformable for multiplication!");
         } else {
             //initialize product matrix
-            c.defineRow(a.returnRow());
-            c.defineCol(b.returnCol());
+            c.setRow(a.getRow());
+            c.setCol(b.getCol());
             c.defineMatrix();
 
             //multiply here
-            for (int x = 0; x < c.returnRow(); x++) {
-                for (int y = 0; y < c.returnCol(); y++) {
-                    for (int i = 0; i < a.returnCol(); i++) {
+            for (int x = 0; x < c.getRow(); x++) {
+                for (int y = 0; y < c.getCol(); y++) {
+                elem = 0;
+                    for (int i = 0; i < a.getCol(); i++) {
                         System.out.println("Multiplying element of A in row " + x + " and column " + i
                                 + " to element of B in row " + i + " and column " + y + ": "
-                                + a.returnValue(x, i) + "*" + b.returnValue(i, y));
-                        System.out.println("Result: " + a.returnValue(x, i) * b.returnValue(i, y));
-                        elem += (a.returnValue(x, i) * b.returnValue(i, y));
+                                + a.getValue(x, i) + "*" + b.getValue(i, y));
+                        
+                        
+                        System.out.println("Result: " + a.getValue(x, i) * b.getValue(i, y));
+                        
+                        
+                        elem += (a.getValue(x, i) * b.getValue(i, y));
                     }
-                    c.changeValue(x, y, elem);
+                    c.setValue(x, y, elem);
 //                  int i=0;
 //                  //for each row in matrix A
-//                  while(i<a.returnRow()){
+//                  while(i<a.getRow()){
 //                      //get one column in matrix B
-//                      for(int j=0; j<b.returnCol(); j++){
+//                      for(int j=0; j<b.getCol(); j++){
 //                      //sum of multiplying all entries of one row of matrix A
 //                      //to one column of matrix B
 //                          
@@ -224,6 +244,6 @@ public class matrixop {
             c.displayMatrix();
 
         }//end else
-
+        return c;
     }//end multiplyMatrix
 }

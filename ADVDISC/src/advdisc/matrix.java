@@ -1,22 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To set this license header, choose License Headers in Project Properties.
+ * To set this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package advdisc;
 
 /*
 * Created on: 11-17-2015
-* Desc: program that defines and does operations on a defined matrix;
+* Desc: program that sets and does operations on a setd matrix;
 *   school requirement for ADVDISC for SY 2015-2016 T1
 * Authors: Marienne Lopez & Arces Talavera
 */
 
 class matrix{
-    float[][] m;
-    int row, col;
+    private float[][] m;
+    private int row, col;
     
-    //define matrix
+    //set matrix
     public matrix(float[][] a, int row, int col){
         m = a;
         this.row = row;
@@ -27,19 +27,19 @@ class matrix{
         
     }
     
-    public void defineRow(int row){
+    public void setRow(int row){
        this.row = row;
     }
     
-    public void defineCol(int col){
+    public void setCol(int col){
         this.col = col;
     }
     
-    public int returnRow(){
+    public int getRow(){
         return this.row;
     }
     
-    public int returnCol(){
+    public int getCol(){
         return this.col;
     }
     
@@ -52,29 +52,29 @@ class matrix{
 //        boolean accept = true;
 //        if (this.row != this.col)
 //            accept = false;
-//        return accept;
+//        get accept;
 //    }
     
-    public float[][] returnMatrix(){
+    public float[][] getMatrix(){
         return this.m;
     }
     
-    public void changeValue(int row, int col, float value){
+    public void setValue(int row, int col, float value){
         m[row][col] = value;
 //        System.out.println("Value entered - " + m[row][col]);
     }
     
-    public float returnValue(int row, int col){
+    public float getValue(int row, int col){
         return m[row][col];
     }
     
-    public float[] returnMatrixRow(int row){
+    public float[] getMatrixRow(int row){
         return m[row];
     }
     public void displayMatrix(){
-        for(int i=0; i<returnRow(); i++){
+        for(int i=0; i<getRow(); i++){
             System.out.printf("[");
-            for(int j=0; j<returnCol(); j++){
+            for(int j=0; j<getCol(); j++){
                 System.out.printf("%5.2f ", m[i][j]);
             }
             System.out.printf("]\n");
