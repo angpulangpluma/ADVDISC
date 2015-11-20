@@ -246,23 +246,13 @@ public class MatrixResult extends javax.swing.JFrame {
     }//GEN-LAST:event_divideAgainBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BackBtn;
-    private javax.swing.JButton BackBtn1;
     private javax.swing.JButton divideAgainBtn;
-    private javax.swing.JButton divideBtn;
     private javax.swing.JPanel dividePanel;
     private javax.swing.JPanel inversePanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables

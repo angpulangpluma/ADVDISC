@@ -291,19 +291,21 @@ public class MatrixInput extends javax.swing.JFrame {
                 }
             }
         }
-
-        if (isValid) {
-            resultInverse = operation.getInverse(b);
-            if (resultInverse != null) {
-                resultDivide = operation.multiplyMatrix(a, resultInverse);
-                operation.setFirstMatrix(resultInverse);
-                operation.setSecondMatrix(resultDivide);
-                dispose();
-                new MatrixResult().setVisible(true);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Inverse of B doesn't exist!", "Error!", JOptionPane.WARNING_MESSAGE);
+        //check if b has row of zeros
+        if (operation.hasZeroRow(b)) {
+            JOptionPane.showMessageDialog(null, "Your Matrix B has a row of zeros!", "Matrix B is singular!", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (isValid) {
+                resultInverse = operation.getInverse(b);
+                if (resultInverse != null) {
+                    resultDivide = operation.multiplyMatrix(a, resultInverse);
+                    operation.setFirstMatrix(resultInverse);
+                    operation.setSecondMatrix(resultDivide);
+                    dispose();
+                    new MatrixResult().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Inverse of B doesn't exist!", "Error!", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_divideBtnActionPerformed
